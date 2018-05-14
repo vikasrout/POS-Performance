@@ -1,0 +1,2080 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="NDB-POS" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="POS" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+          <boolProp name="clearEachIteration">false</boolProp>
+          <boolProp name="useExpires">false</boolProp>
+        </CacheManager>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+          <stringProp name="filename">C:\Users\vikas.rout\Desktop\Data.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="BASE_URL_Stage" elementType="Argument">
+              <stringProp name="Argument.name">BASE_URL_Stage</stringProp>
+              <stringProp name="Argument.value">pos-stage.nextdayblinds.com</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="BASE_URL_QA" elementType="Argument">
+              <stringProp name="Argument.name">BASE_URL_QA</stringProp>
+              <stringProp name="Argument.value">ndb-dev02.nextdayblinds.com</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="QA_Port" elementType="Argument">
+              <stringProp name="Argument.name">QA_Port</stringProp>
+              <stringProp name="Argument.value">5004</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${BASE_URL_Stage}</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor-guid" enabled="true">
+          <stringProp name="JSONPostProcessor.referenceNames">guid</stringProp>
+          <stringProp name="JSONPostProcessor.jsonPathExprs">$.guid</stringProp>
+          <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+          <stringProp name="Sample.scope">all</stringProp>
+        </JSONPostProcessor>
+        <hashTree/>
+        <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extracto-CustomerSummary_customerAccountGuid" enabled="true">
+          <stringProp name="JSONPostProcessor.referenceNames">customerAccountGuid</stringProp>
+          <stringProp name="JSONPostProcessor.jsonPathExprs">$.phones[0].customerAccountGuid</stringProp>
+          <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+          <stringProp name="Sample.scope">all</stringProp>
+        </JSONPostProcessor>
+        <hashTree/>
+        <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extracto-OpenActivities_customerAccountGuid" enabled="true">
+          <stringProp name="JSONPostProcessor.referenceNames">customerAccountGuid_1</stringProp>
+          <stringProp name="JSONPostProcessor.jsonPathExprs">$.primaryPhoneDetails.customerAccountGuid</stringProp>
+          <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+          <stringProp name="Sample.scope">all</stringProp>
+        </JSONPostProcessor>
+        <hashTree/>
+        <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extracto-Customer_Guid" enabled="true">
+          <stringProp name="JSONPostProcessor.referenceNames">guid_1</stringProp>
+          <stringProp name="JSONPostProcessor.jsonPathExprs">$.phones.0.customerAccountGuid</stringProp>
+          <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+          <stringProp name="Sample.scope">all</stringProp>
+        </JSONPostProcessor>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">hmac 6270b8f7-2364-476c-af60-adb5264b837e:{{hmac-signature}}:{{hmac-nonce}}:{{hmac-timestamp}}</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Accept</stringProp>
+              <stringProp name="Header.value">*/*</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="LoginPage" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LoginScreen" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/login</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LoginToPOS" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;Username&quot;:&quot;${Username}&quot;&#xd;
+,&quot;Password&quot;:&quot;${Password}&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/account/login</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">origin</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>false</message>
+                  <threadName>true</threadName>
+                  <dataType>false</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>false</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <hostname>true</hostname>
+                  <threadCounts>true</threadCounts>
+                  <sampleCount>true</sampleCount>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="HomePage" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LeadsDisplay" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/Appointment/getAppointments</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="SearchPage" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SearchLink" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;SearchFirstName&quot;:&quot;${SearchFirstName}&quot;,&#xd;
+&quot;SearchLastName&quot;:&quot;${SearchLastName}&quot;,&#xd;
+&quot;SearchEmail&quot;:&quot;${SearchEmail}&quot;,&#xd;
+&quot;SearchPhoneNumber&quot;:&quot;${SearchPhoneNumber}&quot;,&#xd;
+&quot;SearchStreet&quot;:&quot;${SearchStreet}&quot;,&#xd;
+&quot;SearchCity&quot;:&quot;${SearchCity}&quot;,&#xd;
+&quot;SearchStateAbbreviation&quot;:&quot;${SearchStateAbbreviation}&quot;,&#xd;
+&quot;SearchPostalCode&quot;:&quot;${SearchPostalCode}&quot;,&#xd;
+&quot;PageIndex&quot;:&quot;${PageIndex}&quot;&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/search/searchCustomers</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">https://ndb-dev02.nextdayblinds.com:5004</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/search</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>false</message>
+                  <threadName>true</threadName>
+                  <dataType>false</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>false</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <hostname>true</hostname>
+                  <threadCounts>true</threadCounts>
+                  <sampleCount>true</sampleCount>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EnterNewCustomer" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;SearchFirstName&quot;:&quot;vikas&quot;,&#xd;
+&quot;SearchLastName&quot;:&quot;rout&quot;,&#xd;
+&quot;SearchPhoneNumber&quot;:&quot;(587) 931-6979&quot;,&#xd;
+&quot;IncludeActivities&quot;:false&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/search/searchCustomers</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EnterNewCustomer-AddUpdateAccount" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;CustomerType&quot;:&quot;Residential&quot;,&#xd;
+&quot;Salutation&quot;:&quot;&quot;,&#xd;
+&quot;FirstName&quot;:&quot;vikas&quot;,&#xd;
+&quot;LastName&quot;:&quot;rout&quot;,&#xd;
+&quot;Emails&quot;:[],&#xd;
+&quot;Phones&quot;:[{&quot;Number&quot;:&quot;(587) 931-6979&quot;,&quot;PhoneType&quot;:&quot;Mobile&quot;,&quot;IsPrimary&quot;:true}],&#xd;
+&quot;Addresses&quot;:[]&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/CustomerAccount/AddUpdateAccount</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>false</message>
+                <threadName>true</threadName>
+                <dataType>false</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>false</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <hostname>true</hostname>
+                <threadCounts>true</threadCounts>
+                <sampleCount>true</sampleCount>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EnterNewCustomer-GettingGuid" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="guid" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">guid</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">guid</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/customeraccount/customers/${guid}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>false</message>
+                <threadName>true</threadName>
+                <dataType>false</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>false</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <hostname>true</hostname>
+                <threadCounts>true</threadCounts>
+                <sampleCount>true</sampleCount>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EnterNewCustomer-customersummary" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="customerAccountGuid" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">customerAccountGuid</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">customerAccountGuid</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/customeraccount/customersummary/${customerAccountGuid}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>false</message>
+                <threadName>true</threadName>
+                <dataType>false</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>false</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <hostname>true</hostname>
+                <threadCounts>true</threadCounts>
+                <sampleCount>true</sampleCount>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EnterNewCustomer-OpenActivities" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="customerAccountGuid_1" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">customerAccountGuid_1</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">customerAccountGuid_1</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/Activity/OpenActivities/${customerAccountGuid_1}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>false</message>
+                <threadName>true</threadName>
+                <dataType>false</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>false</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <hostname>true</hostname>
+                <threadCounts>true</threadCounts>
+                <sampleCount>true</sampleCount>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EnterNewCustomer-customer" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="customerAccountGuid_1" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">customerAccountGuid_1</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">customerAccountGuid_1</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/customeraccount/customers/${customerAccountGuid_1}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>false</message>
+                <threadName>true</threadName>
+                <dataType>false</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>false</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <hostname>true</hostname>
+                <threadCounts>true</threadCounts>
+                <sampleCount>true</sampleCount>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EnterNewCustomer-ActivitiesHistory" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="guid_1" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">guid_1</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">guid_1</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/Activity/customerActivitiesHistory/${guid_1}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>false</message>
+                <threadName>true</threadName>
+                <dataType>false</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>false</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <hostname>true</hostname>
+                <threadCounts>true</threadCounts>
+                <sampleCount>true</sampleCount>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="CustomerPage" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CustomerViewPage" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/customeraccount/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CustomerActivityHistory" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/Activity/customerActivitiesHistory/97b57a6a-8368-4384-bd6e-7ee210b47d09</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CustomerSummary" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/customeraccount/customersummary/97b57a6a-8368-4384-bd6e-7ee210b47d09</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OpenActivities" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/Activity/OpenActivities/97b57a6a-8368-4384-bd6e-7ee210b47d09</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="CreateNewQuote" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetStores" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/Store/getStores</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09 /quote</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GetMeasurers" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;employeeNumber&quot;:null}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">NdbPOSAPI/api/measurer/getMeasurers</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">1</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UpdatedOptionsAsPerDeliveryType" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;depth&quot;:null,&quot;deliveryType&quot;:&quot;Installation&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/product/productsbytype</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="TestPlan.comments">On Providing Dimensions and product type</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UpdatedOptionsAsPerDimensions" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;width&quot;:33,&quot;height&quot;:33,&quot;depth&quot;:null,&quot;deliveryType&quot;:&quot;Installation&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/product/productsbytype</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Origin" elementType="Header">
+                <stringProp name="Header.name">Origin</stringProp>
+                <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+              </elementProp>
+              <elementProp name="Referer" elementType="Header">
+                <stringProp name="Header.name">Referer</stringProp>
+                <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09/quote</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UpdatedOptionsAsPerProduct" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;ProductCode&quot;:&quot;MB-CBHDR&quot;,&quot;SelectedWidth&quot;:33,&quot;SelectedHeight&quot;:33,&quot;SelectedDepth&quot;:null,&quot;OldOptionTypeWithOptions&quot;:[],&quot;deliveryType&quot;:&quot;Installation&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/product/GetUpdatedOptionsByType</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09/quote</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UpdatedOptionsAsPerMounting" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;ProductCode&quot;:&quot;MB-CBHDR&quot;,&quot;SelectedWidth&quot;:33,&quot;SelectedHeight&quot;:33,&quot;SelectedDepth&quot;:null,&quot;SelectedOptions&quot;:[{&quot;OptionTypeConstant&quot;:&quot;Mounting&quot;,&quot;Sku&quot;:&quot;IB&quot;}],&quot;OldOptionTypeWithOptions&quot;:[{&quot;categoryName&quot;:&quot;Product Detail - FINAL NAME TBD&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;Mounting&quot;,&quot;name&quot;:&quot;Mounting&quot;,&quot;requirement&quot;:&quot;RequiredAlways&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Inside Mount&quot;,&quot;value&quot;:&quot;IB&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Outside Mount&quot;,&quot;value&quot;:&quot;OB&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;Color&quot;,&quot;name&quot;:&quot;Color&quot;,&quot;requirement&quot;:&quot;RequiredAlways&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;Uncategorized&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;No Color Selected&quot;,&quot;value&quot;:&quot;!COLOR!&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Uncategorized&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false}]},{&quot;label&quot;:&quot;Glossy&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Frost&quot;,&quot;value&quot;:&quot;25-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_25_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Matte Frost&quot;,&quot;value&quot;:&quot;52-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_52_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Cream&quot;,&quot;value&quot;:&quot;848-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_848_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Beige&quot;,&quot;value&quot;:&quot;285-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_285_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:5,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Smoke&quot;,&quot;value&quot;:&quot;10-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_10_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:6,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Bronze&quot;,&quot;value&quot;:&quot;60-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_60_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:7,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Matte Onyx&quot;,&quot;value&quot;:&quot;49-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_49_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:8,&quot;requiresInstallation&quot;:false}]}]}]},{&quot;categoryName&quot;:&quot;Operating System&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;ControlLocation&quot;,&quot;name&quot;:&quot;Control Position&quot;,&quot;requirement&quot;:&quot;RequiredIfCompatible&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Tilt Left/Lift Right&quot;,&quot;value&quot;:&quot;LR&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Right/Lift Left&quot;,&quot;value&quot;:&quot;RL&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Left/Lift Left&quot;,&quot;value&quot;:&quot;LL&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Right/Lift Right&quot;,&quot;value&quot;:&quot;RR&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false}]}]}]},{&quot;categoryName&quot;:&quot;Options&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;HoldDownBrackets&quot;,&quot;name&quot;:&quot;Add Hold-Down Brackets&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;SpacerBlocks&quot;,&quot;name&quot;:&quot;Add Spacer Blocks&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;InstallOnDoor&quot;,&quot;name&quot;:&quot;Install on Door&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;MountingBoard&quot;,&quot;name&quot;:&quot;Mounting Board&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Boardwidth = Ordered Width - 1/8 In.&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width&quot;,&quot;value&quot;:&quot;B00&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/8 In.&quot;,&quot;value&quot;:&quot;B18&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/4 In.&quot;,&quot;value&quot;:&quot;B14&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 3/8 In.&quot;,&quot;value&quot;:&quot;B38&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:5,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/2 In.&quot;,&quot;value&quot;:&quot;B12&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:6,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 5/8 In.&quot;,&quot;value&quot;:&quot;B58&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:7,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 3/4 In.&quot;,&quot;value&quot;:&quot;B34&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:8,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 7/8 In.&quot;,&quot;value&quot;:&quot;B78&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:9,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1 In.&quot;,&quot;value&quot;:&quot;B10&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:10,&quot;requiresInstallation&quot;:false}]}]}]}],&quot;deliveryType&quot;:&quot;Installation&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/product/GetUpdatedOptionsByType</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09/quote</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UpdatedOptionsAsPerColor" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;ProductCode&quot;:&quot;MB-CBHDR&quot;,&quot;SelectedWidth&quot;:33,&quot;SelectedHeight&quot;:33,&quot;SelectedDepth&quot;:null,&quot;SelectedOptions&quot;:[{&quot;OptionTypeConstant&quot;:&quot;Mounting&quot;,&quot;Sku&quot;:&quot;IB&quot;},{&quot;OptionTypeConstant&quot;:&quot;Color&quot;,&quot;Sku&quot;:&quot;848-CBCLRS&quot;}],&quot;OldOptionTypeWithOptions&quot;:[{&quot;categoryName&quot;:&quot;Product Detail - FINAL NAME TBD&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;Mounting&quot;,&quot;name&quot;:&quot;Mounting&quot;,&quot;requirement&quot;:&quot;RequiredAlways&quot;,&quot;selectedValue&quot;:&quot;IB&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Inside Mount&quot;,&quot;value&quot;:&quot;IB&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Outside Mount&quot;,&quot;value&quot;:&quot;OB&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;Color&quot;,&quot;name&quot;:&quot;Color&quot;,&quot;requirement&quot;:&quot;RequiredAlways&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;Uncategorized&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;No Color Selected&quot;,&quot;value&quot;:&quot;!COLOR!&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Uncategorized&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false}]},{&quot;label&quot;:&quot;Glossy&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Frost&quot;,&quot;value&quot;:&quot;25-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_25_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Matte Frost&quot;,&quot;value&quot;:&quot;52-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_52_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Cream&quot;,&quot;value&quot;:&quot;848-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_848_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Beige&quot;,&quot;value&quot;:&quot;285-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_285_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:5,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Smoke&quot;,&quot;value&quot;:&quot;10-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_10_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:6,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Bronze&quot;,&quot;value&quot;:&quot;60-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_60_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:7,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Matte Onyx&quot;,&quot;value&quot;:&quot;49-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_49_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:8,&quot;requiresInstallation&quot;:false}]}]}]},{&quot;categoryName&quot;:&quot;Operating System&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;ControlLocation&quot;,&quot;name&quot;:&quot;Control Position&quot;,&quot;requirement&quot;:&quot;RequiredIfCompatible&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Tilt Left/Lift Right&quot;,&quot;value&quot;:&quot;LR&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Right/Lift Left&quot;,&quot;value&quot;:&quot;RL&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Left/Lift Left&quot;,&quot;value&quot;:&quot;LL&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Right/Lift Right&quot;,&quot;value&quot;:&quot;RR&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false}]}]}]},{&quot;categoryName&quot;:&quot;Options&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;HoldDownBrackets&quot;,&quot;name&quot;:&quot;Add Hold-Down Brackets&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[]},{&quot;label&quot;:&quot;NOT COMPATIBLE WITH PREVIOUS SELECTION&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;NotCompatible&quot;,&quot;userMessage&quot;:&quot;Hold-Down Brackets and Inside Mount cannot be combined.&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;SpacerBlocks&quot;,&quot;name&quot;:&quot;Add Spacer Blocks&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[]},{&quot;label&quot;:&quot;NOT COMPATIBLE WITH PREVIOUS SELECTION&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;NotCompatible&quot;,&quot;userMessage&quot;:&quot;Inside Mount and Spacer Blocks cannot be combined.&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;InstallOnDoor&quot;,&quot;name&quot;:&quot;Install on Door&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;MountingBoard&quot;,&quot;name&quot;:&quot;Mounting Board&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Boardwidth = Ordered Width - 1/8 In.&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width&quot;,&quot;value&quot;:&quot;B00&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/8 In.&quot;,&quot;value&quot;:&quot;B18&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/4 In.&quot;,&quot;value&quot;:&quot;B14&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 3/8 In.&quot;,&quot;value&quot;:&quot;B38&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:5,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/2 In.&quot;,&quot;value&quot;:&quot;B12&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:6,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 5/8 In.&quot;,&quot;value&quot;:&quot;B58&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:7,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 3/4 In.&quot;,&quot;value&quot;:&quot;B34&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:8,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 7/8 In.&quot;,&quot;value&quot;:&quot;B78&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:9,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1 In.&quot;,&quot;value&quot;:&quot;B10&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:10,&quot;requiresInstallation&quot;:false}]}]}]}],&quot;deliveryType&quot;:&quot;Installation&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/product/GetUpdatedOptionsByType</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09/quote</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UpdatedOptionsAsPerControlPosition" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;ProductCode&quot;:&quot;MB-CBHDR&quot;,&quot;SelectedWidth&quot;:33,&quot;SelectedHeight&quot;:33,&quot;SelectedDepth&quot;:null,&quot;SelectedOptions&quot;:[{&quot;OptionTypeConstant&quot;:&quot;Mounting&quot;,&quot;Sku&quot;:&quot;IB&quot;},{&quot;OptionTypeConstant&quot;:&quot;Color&quot;,&quot;Sku&quot;:&quot;848-CBCLRS&quot;},{&quot;OptionTypeConstant&quot;:&quot;ControlLocation&quot;,&quot;Sku&quot;:&quot;LL&quot;}],&quot;OldOptionTypeWithOptions&quot;:[{&quot;categoryName&quot;:&quot;Product Detail - FINAL NAME TBD&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;Mounting&quot;,&quot;name&quot;:&quot;Mounting&quot;,&quot;requirement&quot;:&quot;RequiredAlways&quot;,&quot;selectedValue&quot;:&quot;IB&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Inside Mount&quot;,&quot;value&quot;:&quot;IB&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Outside Mount&quot;,&quot;value&quot;:&quot;OB&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;Color&quot;,&quot;name&quot;:&quot;Color&quot;,&quot;requirement&quot;:&quot;RequiredAlways&quot;,&quot;selectedValue&quot;:&quot;848-CBCLRS&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;Uncategorized&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;No Color Selected&quot;,&quot;value&quot;:&quot;!COLOR!&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Uncategorized&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false}]},{&quot;label&quot;:&quot;Glossy&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Frost&quot;,&quot;value&quot;:&quot;25-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_25_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Matte Frost&quot;,&quot;value&quot;:&quot;52-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_52_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Cream&quot;,&quot;value&quot;:&quot;848-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_848_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Beige&quot;,&quot;value&quot;:&quot;285-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_285_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:5,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Smoke&quot;,&quot;value&quot;:&quot;10-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_10_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:6,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Bronze&quot;,&quot;value&quot;:&quot;60-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_60_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:7,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Matte Onyx&quot;,&quot;value&quot;:&quot;49-CBCLRS&quot;,&quot;imageFullUrl&quot;:&quot;https://images.nextdayblinds.com/stage/images/swatches/mb/cbclrs_49_swatch_sm.jpg&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;Glossy&quot;,&quot;sortOrder&quot;:8,&quot;requiresInstallation&quot;:false}]}]}]},{&quot;categoryName&quot;:&quot;Operating System&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;ControlLocation&quot;,&quot;name&quot;:&quot;Control Position&quot;,&quot;requirement&quot;:&quot;RequiredIfCompatible&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Tilt Left/Lift Right&quot;,&quot;value&quot;:&quot;LR&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Right/Lift Left&quot;,&quot;value&quot;:&quot;RL&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Left/Lift Left&quot;,&quot;value&quot;:&quot;LL&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Tilt Right/Lift Right&quot;,&quot;value&quot;:&quot;RR&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false}]}]}]},{&quot;categoryName&quot;:&quot;Options&quot;,&quot;optionTypes&quot;:[{&quot;constant&quot;:&quot;HoldDownBrackets&quot;,&quot;name&quot;:&quot;Add Hold-Down Brackets&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[]},{&quot;label&quot;:&quot;NOT COMPATIBLE WITH PREVIOUS SELECTION&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;NotCompatible&quot;,&quot;userMessage&quot;:&quot;Hold-Down Brackets and Inside Mount cannot be combined.&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;SpacerBlocks&quot;,&quot;name&quot;:&quot;Add Spacer Blocks&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[]},{&quot;label&quot;:&quot;NOT COMPATIBLE WITH PREVIOUS SELECTION&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;NotCompatible&quot;,&quot;userMessage&quot;:&quot;Inside Mount and Spacer Blocks cannot be combined.&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;InstallOnDoor&quot;,&quot;name&quot;:&quot;Install on Door&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Yes&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false}]}]},{&quot;constant&quot;:&quot;MountingBoard&quot;,&quot;name&quot;:&quot;Mounting Board&quot;,&quot;requirement&quot;:&quot;Optional&quot;,&quot;selectedValue&quot;:&quot;&quot;,&quot;categorizedOptions&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;options&quot;:[{&quot;label&quot;:&quot;Boardwidth = Ordered Width - 1/8 In.&quot;,&quot;value&quot;:&quot;Y&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:1,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width&quot;,&quot;value&quot;:&quot;B00&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:2,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/8 In.&quot;,&quot;value&quot;:&quot;B18&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:3,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/4 In.&quot;,&quot;value&quot;:&quot;B14&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:4,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 3/8 In.&quot;,&quot;value&quot;:&quot;B38&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:5,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1/2 In.&quot;,&quot;value&quot;:&quot;B12&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:6,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 5/8 In.&quot;,&quot;value&quot;:&quot;B58&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:7,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 3/4 In.&quot;,&quot;value&quot;:&quot;B34&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:8,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 7/8 In.&quot;,&quot;value&quot;:&quot;B78&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:9,&quot;requiresInstallation&quot;:false},{&quot;label&quot;:&quot;Boardwidth = Ordered Width + 1 In.&quot;,&quot;value&quot;:&quot;B10&quot;,&quot;imageFullUrl&quot;:&quot;&quot;,&quot;compatibility&quot;:&quot;Compatible&quot;,&quot;userMessage&quot;:&quot;&quot;,&quot;category&quot;:&quot;&quot;,&quot;sortOrder&quot;:10,&quot;requiresInstallation&quot;:false}]}]}]}],&quot;deliveryType&quot;:&quot;Installation&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/product/GetUpdatedOptionsByType</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09/quote</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AddProductInCart" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;productLineDetails&quot;:{&quot;Item&quot;:{&quot;ProductCode&quot;:&quot;MB-CBHDR&quot;,&quot;Width&quot;:33,&quot;Height&quot;:33,&quot;Depth&quot;:null,&quot;Options&quot;:[{&quot;OptionTypeConstant&quot;:&quot;Mounting&quot;,&quot;Sku&quot;:&quot;IB&quot;},{&quot;OptionTypeConstant&quot;:&quot;Color&quot;,&quot;Sku&quot;:&quot;848-CBCLRS&quot;},{&quot;OptionTypeConstant&quot;:&quot;ControlLocation&quot;,&quot;Sku&quot;:&quot;LL&quot;}],&quot;Quantity&quot;:1,&quot;Room&quot;:&quot;Room 1&quot;,&quot;LineNumber&quot;:1,&quot;NumTakeDowns&quot;:0,&quot;NumConcreteSteelInstalls&quot;:0,&quot;NumRehangs&quot;:0},&quot;CustomerAccountGuid&quot;:&quot;97b57a6a-8368-4384-bd6e-7ee210b47d09&quot;,&quot;sessionGuid&quot;:null},&quot;quoteDetails&quot;:{&quot;storeCode&quot;:&quot;S1&quot;,&quot;group&quot;:&quot;A&quot;,&quot;customerAccountGuid&quot;:&quot;97b57a6a-8368-4384-bd6e-7ee210b47d09&quot;,&quot;deliveryAddress&quot;:{&quot;streetLine1&quot;:&quot;30 Lavina Trl&quot;,&quot;streetLine2&quot;:&quot;Ew&quot;,&quot;city&quot;:&quot;Oak Ridge&quot;,&quot;stateAbbreviation&quot;:&quot;NJ&quot;,&quot;postalCode&quot;:&quot;07438&quot;,&quot;zipPlus4&quot;:&quot;9326&quot;},&quot;deliveryType&quot;:&quot;Installation&quot;,&quot;nickname&quot;:&quot;TestNewQuote&quot;,&quot;phoneNumbers&quot;:[{&quot;customerAccountGuid&quot;:&quot;97b57a6a-8368-4384-bd6e-7ee210b47d09&quot;,&quot;extension&quot;:&quot;&quot;,&quot;guid&quot;:&quot;8454edec-de8e-403f-9425-b0ee7443a48d&quot;,&quot;isPrimary&quot;:true,&quot;allowTextMessages&quot;:false,&quot;number&quot;:&quot;6298138721&quot;,&quot;phoneType&quot;:&quot;Mobile&quot;}],&quot;sidemark&quot;:&quot;Thaman, S&quot;,&quot;leadNumber&quot;:&quot;&quot;,&quot;salespersonEmployeeNumber&quot;:&quot;5842&quot;,&quot;number&quot;:&quot;&quot;,&quot;sessionGuid&quot;:null,&quot;deliveryContact&quot;:{&quot;name&quot;:&quot;Shivani Thaman&quot;,&quot;phoneNumber&quot;:&quot;(629) 813-8721&quot;},&quot;priceAdjustments&quot;:[],&quot;builderCode&quot;:&quot;&quot;,&quot;couponCode&quot;:&quot;&quot;,&quot;couponDiscountAmount&quot;:&quot;&quot;,&quot;builderDiscountAmount&quot;:&quot;&quot;,&quot;highRiseBuilding&quot;:false,&quot;advancedInstallation&quot;:false,&quot;ladderRequired&quot;:false,&quot;measurerEmployeeNumber&quot;:0,&quot;customerNotes&quot;:&quot;Dear Shivani Thaman,\nThank you again for your interest in Next Day Blinds for your custom window treatment needs. Please see below for the quote we discussed. If you should have any questions, please feel free to call us at 240-393-3273.\nBest Regards,\nDEBORAH MEADOWS&quot;}}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/product/addupdatecart</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/customers/97b57a6a-8368-4384-bd6e-7ee210b47d09/quote</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="ViewQuotes" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getQuotes" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">NdbPOSAPI/api/quote/701286</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/quotes/701388</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="QuotePageView" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Adjustments" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">NdbPOSAPI/api/adjustment/getPriceAdjustmentReasons</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/quotes/701388</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BuilderAccount" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">NdbPOSAPI/api/builder/getBuilderAccount</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/quotes/701388</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">8316</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PromoCode" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;CouponCode&quot;:&quot;eg&quot;,&quot;OrderSubtotal&quot;:47,&quot;index&quot;:0}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">NdbPOSAPI/api/adjustment/getCouponDiscount</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com</stringProp>
+                </elementProp>
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/quotes/701388</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">8316</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CalculateOrderPrice" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;deliveryType&quot;:&quot;Installation&quot;,&quot;postalCode&quot;:&quot;12345&quot;,&quot;stateAbbreviation&quot;:&quot;DC&quot;,&quot;sessionGuid&quot;:&quot;65a82ce0-9a89-4a7a-8f01-17ab1b61e9f2&quot;,&quot;builderDiscountAmount&quot;:0,&quot;couponDiscountAmount&quot;:19,&quot;otherInstallSurcharge&quot;:0,&quot;salesTaxExempt&quot;:false,&quot;shippingCost&quot;:0,&quot;totalPriceAdjustmentAmount&quot;:30}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">NdbPOSAPI/api/quote/calculateOrderPrice</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">https://pos-stage.nextdayblinds.com/quotes/701388</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SalesPeople" enabled="true">
+            <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+              <collectionProp name="HTTPFileArgs.files">
+                <elementProp name="C:\Users\vikas.rout\Desktop\Data.csv" elementType="HTTPFileArg">
+                  <stringProp name="File.path">C:\Users\vikas.rout\Desktop\Data.csv</stringProp>
+                  <stringProp name="File.paramname">${fullname)</stringProp>
+                  <stringProp name="File.mimetype"></stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/salesPeople/getSalesPeople</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>true</message>
+                  <threadName>true</threadName>
+                  <dataType>true</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>true</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <threadCounts>true</threadCounts>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SalesTax" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;PostalCode&quot;: &quot;22306&quot;, &#xd;
+	&quot;StateAbbreviation&quot;: &quot;VA&quot;, &#xd;
+	&quot;DeliveryType&quot;: &quot;Installation&quot;&#xd;
+	}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/adjustment/getSalesTaxRate</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SalesTax-calculateOrderPrice" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+&quot;deliveryType&quot;:&quot;Installation&quot;,&#xd;
+&quot;postalCode&quot;:&quot;22180&quot;,&#xd;
+&quot;stateAbbreviation&quot;:&quot;VA&quot;,&quot;sessionGuid&quot;:null,&#xd;
+&quot;builderDiscountAmount&quot;:0,&#xd;
+&quot;couponDiscountAmount&quot;:0,&#xd;
+&quot;otherInstallSurcharge&quot;:0,&#xd;
+&quot;salesTaxExempt&quot;:false,&#xd;
+&quot;shippingCost&quot;:0,&#xd;
+&quot;totalPriceAdjustmentAmount&quot;:0&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NdbPOSAPI/api/quote/calculateOrderPrice</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>true</message>
+                  <threadName>true</threadName>
+                  <dataType>true</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>true</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <threadCounts>true</threadCounts>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Getcart" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/Retail/GetCart</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>true</message>
+                  <threadName>true</threadName>
+                  <dataType>true</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>true</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <threadCounts>true</threadCounts>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">D:\JmeterScripts\Reports\Report.csv</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="HTTP(S) Test Script Recorder" enabled="true">
+        <stringProp name="ProxyControlGui.port">8888</stringProp>
+        <collectionProp name="ProxyControlGui.exclude_list"/>
+        <collectionProp name="ProxyControlGui.include_list"/>
+        <boolProp name="ProxyControlGui.capture_http_headers">true</boolProp>
+        <intProp name="ProxyControlGui.grouping_mode">0</intProp>
+        <boolProp name="ProxyControlGui.add_assertion">false</boolProp>
+        <stringProp name="ProxyControlGui.sampler_type_name"></stringProp>
+        <boolProp name="ProxyControlGui.sampler_redirect_automatically">false</boolProp>
+        <boolProp name="ProxyControlGui.sampler_follow_redirects">true</boolProp>
+        <boolProp name="ProxyControlGui.use_keepalive">true</boolProp>
+        <boolProp name="ProxyControlGui.sampler_download_images">false</boolProp>
+        <intProp name="ProxyControlGui.proxy_http_sampler_naming_mode">0</intProp>
+        <stringProp name="ProxyControlGui.proxy_prefix_http_sampler_name"></stringProp>
+        <stringProp name="ProxyControlGui.proxy_pause_http_sampler"></stringProp>
+        <boolProp name="ProxyControlGui.notify_child_sl_filtered">false</boolProp>
+        <boolProp name="ProxyControlGui.regex_match">false</boolProp>
+        <stringProp name="ProxyControlGui.content_type_include"></stringProp>
+        <stringProp name="ProxyControlGui.content_type_exclude"></stringProp>
+      </ProxyControl>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
